@@ -1,0 +1,94 @@
+<!-- <div class="outer-container m-4">
+  <div class="container gap-4">
+    <div class="card p-3 border-round-xl card">
+      <div class="font-bold mb-2 text-xl">Today</div>
+      <div class="value text-2xl">{{ this.day }}</div>
+    </div>
+    <div class="card p-3 border-round-xl card">
+      <div class="font-bold mb-2 text-xl">Last Week</div>
+      <div class="value text-2xl">{{ this.week }}</div>
+    </div>
+    <div class="card p-3 border-round-xl card">
+      <div class="font-bold mb-2 text-xl">Last Month</div>
+      <div class="value text-2xl">{{ this.month }}</div>
+    </div>
+    <div class="card p-3 border-round-xl card">
+      <div class="font-bold mb-2 text-xl">Last Year</div>
+      <div class="value text-2xl">{{ this.year }}</div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="header mb-3">
+      <div class="font-bold text-4xl mb-1 text-white">
+        HI, RAM<span class="waving-hand ml-2">👋</span>
+      </div>
+      <div class="text-gray-500">Here's what's happening with your money</div>
+    </div> -->
+<div class="container">
+  <div class="inner-container gap-4">
+    <div class="card p-3 border-round-xl">
+      <div>
+        <div class="mb-2 text-xl">Total Earned</div>
+        <div class="value font-bold text-2xl">{{ this.totalEarned }}</div>
+      </div>
+      <div class="icon" style="color: #b54909">
+        <i class="fa-solid fa-wallet"></i>
+      </div>
+    </div>
+    <div class="card p-3 border-round-xl">
+      <div>
+        <div class="mb-2 text-xl">Total Spent</div>
+        <div class="value font-bold text-2xl">{{ this.totalSpent }}</div>
+      </div>
+      <div class="icon" style="color: #85bb65">
+        <i class="fa-solid fa-money-bill-1"></i>
+      </div>
+    </div>
+    <div class="card p-3 border-round-xl">
+      <div>
+        <div class="mb-2 text-xl">Total Saved</div>
+        <div class="value font-bold text-2xl">{{ this.totalSaved }}</div>
+      </div>
+      <div class="icon" style="color: #e37588">
+        <i class="fa-solid fa-piggy-bank"></i>
+      </div>
+    </div>
+    <div class="card p-3 border-round-xl">
+      <div>
+        <div class="mb-2 text-xl">Total Transactions</div>
+        <div class="value font-bold text-2xl">
+          {{ this.totalTransactions }}
+        </div>
+      </div>
+      <div class="icon" style="color: #efcc0f">
+        <i class="fa-solid fa-credit-card"></i>
+      </div>
+    </div>
+    <!-- <div class="card p-3 border-round-xl card">
+      <div class="font-bold mb-2 text-xl">Last Year</div>
+      <div class="value text-2xl">{{ this.year }}</div>
+    </div> -->
+  </div>
+  <div class="chart mt-6 flex-1">
+    <div class="title mb-3 text-xl font-semibold">Transactions</div>
+    <div class="flex">
+      <div class="w-7">
+        <p-chart
+          [width]="'100%'"
+          [height]="'100%'"
+          type="line"
+          [data]="lineChartData"
+          [options]="lineChartOptions"
+        ></p-chart>
+      </div>
+      <div class="pl-5 w-5">
+        <p-chart
+          type="pie"
+          [data]="pieChartData"
+          [options]="pieChartOptions"
+        ></p-chart>
+      </div>
+    </div>
+  </div>
+</div>
