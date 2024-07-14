@@ -6,6 +6,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
 @NgModule({
   declarations: [HomeComponent, TransactionsListComponent],
   imports: [
@@ -14,6 +15,7 @@ import { InputTextModule } from 'primeng/inputtext';
     DashboardRoutingModule,
     TableModule,
     InputTextModule,
+    CalendarModule,
   ],
 })
 export class DashboardModule {}

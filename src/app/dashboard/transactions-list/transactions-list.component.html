@@ -6,7 +6,7 @@
     [value]="transactions"
     sortMode="single"
     [scrollable]="true"
-    scrollHeight="60vh"
+    scrollHeight="45vh"
     [globalFilterFields]="['Narration', 'Date']"
   >
     <ng-template pTemplate="caption">
@@ -24,15 +24,23 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th *ngFor="let col of cols">
-          {{ col }}
+        <th *ngFor="let col of cols" [ngStyle]="{ width: col.width }">
+          {{ col.name }}
         </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-transaction>
       <tr>
-        <td *ngFor="let col of cols" style="width:250px">
-          {{ transaction[col] }}
+        <td
+          *ngFor="let col of cols"
+          [ngStyle]="{ width: col.width, wordBreak: 'break-word' }"
+        >
+          <span *ngIf="col.name == 'Date'; else default">
+            {{ transaction[col.name] | date : "dd-MM-yyyy" }}
+          </span>
+          <ng-template #default>
+            {{ transaction[col.name] }}
+          </ng-template>
         </td>
       </tr>
     </ng-template>

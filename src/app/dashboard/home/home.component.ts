@@ -24,42 +24,40 @@ export class HomeComponent implements OnInit {
   totalEarned: number;
   totalTransactions: number;
   totalSaved: number;
-  // data = {
-  //   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  //   datasets: [
-  //     {
-  //       label: 'First Dataset',
-  //       data: [65, 59, 80, 81, 56, 55, 40],
-  //     },
-  //     {
-  //       label: 'Second Dataset',
-  //       data: [28, 48, 40, 19, 86, 27, 90],
-  //     },
-  //   ],
-  // };
   pieChartData = {};
   lineChartData = {};
   lineChartOptions = {};
   pieChartOptions = {};
   public chart: any;
   ngOnInit(): void {
+    this.getAllData();
+    this.dashboardService.dateRange.valueChanges.subscribe((res) => {
+      if (res && res[0] != null && res[1] != null) this.getAllData();
+    });
+  }
+  getAllData() {
     forkJoin([
       this.dashboardService.getSum({ forColumn: 'Debit' }),
       this.dashboardService.getSum({ forColumn: 'Credit' }),
     ]).subscribe((res: [number, number]) => {
-      this.totalSpent = res[0];
-      this.totalEarned = res[1];
-      this.totalSaved = Number((this.totalEarned - this.totalSpent).toFixed(2));
+      this.totalSpent = res[0] || 0;
+      this.totalEarned = res[1] || 0;
+      this.totalSaved = Math.max(
+        Number((this.totalEarned - this.totalSpent).toFixed(2)),
+        0
+      );
     });
     this.dashboardService.getTransactionsGroupedByMonth().subscribe((res) => {
       this.createLineChart(res);
     });
-    this.dashboardService.getCount().subscribe((res) => {
+    this.dashboardService.getTotalTransactions().subscribe((res) => {
       this.totalTransactions = res;
     });
-    this.dashboardService.getMostSpentOn().subscribe((res) => {
-      this.createPieChart(res);
-    });
+    this.dashboardService
+      .getTransactionsGroupedByCategory()
+      .subscribe((res) => {
+        this.createPieChart(res);
+      });
   }
   // getData(body) {
   //   let { type } = body;
@@ -73,9 +71,9 @@ export class HomeComponent implements OnInit {
   //   });
   // }
   createLineChart({ totalDebited, totalCredited }) {
-    const labels = totalDebited.map((item: any) => item.month);
-    const debited = totalDebited.map((item: any) => item.total);
-    const credited = totalCredited.map((item: any) => item.total);
+    const labels = totalDebited.map((item: any) => item.date);
+    const debited = totalDebited.map((item: any) => item.total || 0);
+    const credited = totalCredited.map((item: any) => item.total || 0);
     this.lineChartOptions = {
       aspectRatio: 1,
       maintainAspectRatio: false,
@@ -102,7 +100,7 @@ export class HomeComponent implements OnInit {
           },
         },
         legend: {
-          // display:false,
+          display: false,
           position: 'bottom',
         },
         scales: {
@@ -139,7 +137,7 @@ export class HomeComponent implements OnInit {
     };
   }
   createPieChart(data) {
-    const labels = data.map((item: any) => item.Narration);
+    const labels = data.map((item: any) => item.Category);
     const value = data.map((item: any) => item.total_debit);
     this.pieChartOptions = {
       aspectRatio: 1,

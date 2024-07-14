@@ -5,12 +5,46 @@
 <div class="h-full relative">
   <div class="background absolute"></div>
   <div class="outer-container flex flex-column">
-    <div class="header mb-3">
+    <div class="header z-1 text-white flex">
+      <div class="title flex align-items-center font-bold mr-7">
+        <i class="fa-solid fa-seedling pr-2 text-3xl"></i>
+        <div class="text-2xl">Frugal</div>
+      </div>
+      <div
+        class="menu-container text-base flex gap-4 align-items-center font-bold"
+      >
+        <div
+          class="menu cursor-pointer border-round-lg"
+          [routerLink]="'/'"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Dashboard
+        </div>
+        <div
+          class="menu cursor-pointer border-round-lg"
+          [routerLink]="'/transactions'"
+          routerLinkActive="active-link"
+        >
+          Transactions
+        </div>
+      </div>
+    </div>
+    <div class="welcome-container mb-3">
       <div class="font-bold text-4xl mb-1 text-white">
         HI, RAM<span class="waving-hand ml-2">👋</span>
       </div>
-      <div class="text-gray-500">Here's what's happening with your money</div>
+      <div class="caption">Here's what's happening with your money</div>
     </div>
-    <router-outlet></router-outlet>
+    <div class="filter-container mb-5 w-20rem">
+      <p-calendar
+        [formControl]="dashboardService.dateRange"
+        selectionMode="range"
+        showIcon="true"
+      ></p-calendar>
+    </div>
+    <div class="flex-1">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

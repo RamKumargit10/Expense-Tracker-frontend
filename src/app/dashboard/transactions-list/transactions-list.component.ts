@@ -9,7 +9,14 @@ import { UtilityService } from 'src/app/services/utility.service';
 })
 export class TransactionsListComponent implements OnInit {
   transactions: any[] = [];
-  cols = ['Date', 'Narration', 'Credit', 'Debit', 'Balance'];
+  cols = [
+    { name: 'Date', width: '10%' },
+    { name: 'Narration', width: '35%' },
+    { name: 'Credit', width: '15%' },
+    { name: 'Debit', width: '15%' },
+    { name: 'Balance', width: '15%' },
+    { name: 'Category', width: '20%' },
+  ];
   constructor(
     public utilityService: UtilityService,
     public dashboardService: DashboardService

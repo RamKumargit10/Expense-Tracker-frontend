@@ -32,15 +32,19 @@
       }
     }
   }
-
-  p-chart {
-    height: 100%;
-    position: relative;
-    // display: flex;
-    width: 100%;
-    div {
+  .chart-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    p-chart {
+      display: block;
       height: 100%;
+      position: relative;
+      max-height: 50vh;
       width: 100%;
+      div {
+        height: 100%;
+        width: 100%;
+      }
     }
   }
 }
